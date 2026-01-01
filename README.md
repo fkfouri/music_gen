@@ -14,4 +14,12 @@ uv sync --no-cache
 - [![Youtube](https://img.youtube.com/vi/n37EUzZ9Pwg/mqdefault.jpg)](https://youtu.be/n37EUzZ9Pwg)
 ```bash
 uv add numpy scipy matplotlib 
+uv add mido pygame-ce librosa
+```
+
+## Curso 002
+
+- [![Youtube](https://img.youtube.com/vi/9Lk4gBBWMqw/mqdefault.jpg)](https://youtu.be/9Lk4gBBWMqw&list=PL_yUKG0GRuliL65l_qEG1uwCC03X4jioL)
+```bash
+uv add scamp
 ```

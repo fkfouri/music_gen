@@ -47,5 +47,6 @@ logs/
 *.log
 
 
-*.mid
+/*.mid
+
 *.lock

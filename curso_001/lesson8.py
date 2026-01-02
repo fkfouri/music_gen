@@ -1,8 +1,7 @@
 # Generating radom melodies
 
-from __init__ import __MUSIC_PATH__
-
 import numpy as np
+from __init__ import __MUSIC_PATH__
 from mido import Message, MidiFile, MidiTrack
 
 # define our variables
@@ -19,7 +18,6 @@ tempo = 500
 # volume = 100  # volume of each note
 
 
-
 # Generate random melody
 notes = np.random.randint(note_range[0], note_range[1] + 1, num_notes)
 
@@ -30,9 +28,9 @@ track = MidiTrack()
 mid.tracks.append(track)
 
 for note in notes:
-    track.append(Message('note_on', note=note, velocity=velocity, time=0))
-    track.append(Message('note_off', note=note, velocity=velocity, time=tempo)) 
+    track.append(Message("note_on", note=note, velocity=velocity, time=0))
+    track.append(Message("note_off", note=note, velocity=velocity, time=tempo))
 
 
-output_file = __MUSIC_PATH__ / 'random_melody.mid'
+output_file = __MUSIC_PATH__ / "random_melody.mid"
 mid.save(output_file)

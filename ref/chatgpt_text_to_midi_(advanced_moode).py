@@ -46,14 +46,29 @@ And ve sgure that the name of the variable is "melody_pitch_duration_data"
 # Paste the chatGPT text here:
 
 melody_pitch_duration_data = [
-    (60, 0.125), (63, 0.083), (65, 0.083), (67, 0.167), (70, 0.167),
-    (72, 0.125), (75, 0.083), (77, 0.083), (79, 0.167), (82, 0.167),
-    (84, 0.125), (87, 0.083), (89, 0.083), (91, 0.167), (94, 0.167),
-    (96, 0.125), (99, 0.083), (101, 0.083), (103, 0.167), (106, 0.167),
+    (60, 0.125),
+    (63, 0.083),
+    (65, 0.083),
+    (67, 0.167),
+    (70, 0.167),
+    (72, 0.125),
+    (75, 0.083),
+    (77, 0.083),
+    (79, 0.167),
+    (82, 0.167),
+    (84, 0.125),
+    (87, 0.083),
+    (89, 0.083),
+    (91, 0.167),
+    (94, 0.167),
+    (96, 0.125),
+    (99, 0.083),
+    (101, 0.083),
+    (103, 0.167),
+    (106, 0.167),
 ]
 
 # @markdown ### Run this cell and th MIDI with the melody will be in your download folder
-import mido
 from mido import Message, MidiFile, MidiTrack
 
 # Constants
@@ -76,18 +91,19 @@ for note, duration in melody_pitch_duration_data:
     # If there's a silence, don't make a note event
     if note != 0:
         # Add a note on event
-        track.append(Message('note_on', note=note, velocity=64, time=0))
+        track.append(Message("note_on", note=note, velocity=64, time=0))
 
     # Wait for the duration of the note/silence
     # We multiply by TICKS_PER_SECOND because duration is in seconds
-    track.append(Message('note_off', note=note, velocity=64, time=int(duration * TICKS_PER_SECOND)))
+    track.append(Message("note_off", note=note, velocity=64, time=int(duration * TICKS_PER_SECOND)))
 
 # Save the MIDI file
-mid.save('melody.mid')
+mid.save("melody.mid")
 
 # Download the file
 from google.colab import files
-files.download('melody.mid')
+
+files.download("melody.mid")
 
 """<hr style="border: 1px solid black;">
 
@@ -114,24 +130,49 @@ use "chord_pitch_duration_data" as the name variable. Not other
 # Paste the chatGPT text here:
 
 chords_pitch_duration_data = [
-    ((60, 63, 67), 0.5), ((62, 65, 69), 0.5), ((64, 67, 71), 0.5),
-    ((66, 69, 73), 0.5), ((68, 71, 75), 0.5), ((70, 73, 77), 0.5),
-    ((72, 75, 79), 0.5), ((74, 77, 81), 0.5), ((76, 79, 83), 0.5),
-    ((78, 81, 85), 0.5), ((80, 83, 87), 0.5), ((82, 85, 89), 0.5),
+    ((60, 63, 67), 0.5),
+    ((62, 65, 69), 0.5),
+    ((64, 67, 71), 0.5),
+    ((66, 69, 73), 0.5),
+    ((68, 71, 75), 0.5),
+    ((70, 73, 77), 0.5),
+    ((72, 75, 79), 0.5),
+    ((74, 77, 81), 0.5),
+    ((76, 79, 83), 0.5),
+    ((78, 81, 85), 0.5),
+    ((80, 83, 87), 0.5),
+    ((82, 85, 89), 0.5),
 ]
 
-[("D4", "F4", "A4"), 0.25], [("C4", "E4", "G4"), 0.25], [(None), 0.5],
-[("D4"), 0.25], [("C4"), 0.25],[("B3"), 0.25], [("A3"), 0.5],
-[("G3"), 0.25],[(None), 0.5],
-[("A3", "C4", "E4"), 0.25], [("G3", "B3", "D4"), 0.25],[("F3", "A3", "C4"), 1],
-[("D3", "F3", "A3"), 0.25],[("E3", "G3", "B3"), 0.25],[("D3", "F3", "A3"), 1.5],
-[("G3", "B3", "D4"), 1],[(None), 1],
-[("D4"), 0.125], [("E4"), 0.125],[("F4"), 0.125], [("G4"), 0.125],[("A4"), 1],[("G4"), 1],
-[(None), 1]]
+x = [
+    [("D4", "F4", "A4"), 0.25],
+    [("C4", "E4", "G4"), 0.25],
+    [(None), 0.5],
+    [("D4"), 0.25],
+    [("C4"), 0.25],
+    [("B3"), 0.25],
+    [("A3"), 0.5],
+    [("G3"), 0.25],
+    [(None), 0.5],
+    [("A3", "C4", "E4"), 0.25],
+    [("G3", "B3", "D4"), 0.25],
+    [("F3", "A3", "C4"), 1],
+    [("D3", "F3", "A3"), 0.25],
+    [("E3", "G3", "B3"), 0.25],
+    [("D3", "F3", "A3"), 1.5],
+    [("G3", "B3", "D4"), 1],
+    [(None), 1],
+    [("D4"), 0.125],
+    [("E4"), 0.125],
+    [("F4"), 0.125],
+    [("G4"), 0.125],
+    [("A4"), 1],
+    [("G4"), 1],
+    [(None), 1],
+]
 
 # @markdown ### Run this cell and th MIDI with the chordswill be in your download folder
 from midiutil.MidiFile import MIDIFile
-
 
 midi_file = MIDIFile(1)
 
@@ -156,6 +197,7 @@ with open("chords.mid", "wb") as output_file:
 
 # Download the MIDI file (if using Google Colab)
 from google.colab import files
+
 files.download("chords.mid")
 
 """<hr style="border: 1px solid black;">
@@ -217,7 +259,6 @@ drum_pitch_duration_data = [
 ]
 
 # @markdown ### Run this cell and th MIDI with the Drums will be in your download folder
-import mido
 from mido import Message, MidiFile, MidiTrack
 
 # Create a new MIDI file
@@ -231,16 +272,17 @@ ticks_per_note = int(ticks_per_beat * 0.25)  # Assuming tempo is 120 bpm, this i
 for note in drum_pitch_duration_data:
     if isinstance(note[0], tuple):  # If more than one note at the same time
         for n in note[0]:
-            track.append(Message('note_on', note=n, velocity=note[2], time=0))
-        track.append(Message('note_off', note=n, velocity=note[2], time=int(note[1]*ticks_per_note)))
+            track.append(Message("note_on", note=n, velocity=note[2], time=0))
+        track.append(Message("note_off", note=n, velocity=note[2], time=int(note[1] * ticks_per_note)))
     else:
-        track.append(Message('note_on', note=note[0], velocity=note[2], time=0))
-        track.append(Message('note_off', note=note[0], velocity=note[2], time=int(note[1]*ticks_per_note)))
+        track.append(Message("note_on", note=note[0], velocity=note[2], time=0))
+        track.append(Message("note_off", note=note[0], velocity=note[2], time=int(note[1] * ticks_per_note)))
 
 # Save the MIDI file
-mid.save('artb.mid')
+mid.save("artb.mid")
 from google.colab import files
-files.download('artb.mid')
+
+files.download("artb.mid")
 
 """# Here are some tips for navigating your DAW:
 ![Alt Text](https://drive.google.com/uc?id=107KkAWtoDpTHhwsdEH9QMv6BU4OIVow1)
@@ -250,4 +292,3 @@ files.download('artb.mid')
 
 ## 2. It's normal that you might need to adjust some MIDI notes to keep them in time. The outputs from ChatGPT are raw and require some fine-tuning.
 """
-

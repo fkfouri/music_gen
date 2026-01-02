@@ -1,5 +1,4 @@
 from mido import MidiFile
-import mido
 
 mid = MidiFile("Jealous_guy.mid", clip=True)
 
@@ -36,11 +35,7 @@ for msg in mid:
             start = active_notes.pop(key)
             duration = current_time - start
 
-            note_data = {
-                "note": msg.note,
-                "start": start,
-                "duration": duration
-            }
+            note_data = {"note": msg.note, "start": start, "duration": duration}
 
             # 🎯 DRUMS (canal 10 → index 9)
             if msg.channel == 9:

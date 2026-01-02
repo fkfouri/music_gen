@@ -1,6 +1,5 @@
-from mido import MidiFile
 from __init__ import JELOUS_GUY_MIDI
-import mido
+from mido import MidiFile
 
 mid = MidiFile(JELOUS_GUY_MIDI)
 
@@ -23,5 +22,3 @@ for i, track in enumerate(mid.tracks):
     print(f"Track {i}: {track.name}")
     for msg in track:
         print(msg)
-
-

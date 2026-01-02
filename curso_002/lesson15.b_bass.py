@@ -14,6 +14,9 @@ bass_durs = [0.75, 0.25, 0.25, 0.5, 0.5, 0.25, 0.5, 0.25, 0.5, 0.5, 0.25]
 # theramin = s.new_part("theramin")
 bass = s.new_part("slap bass")
 
+for i in range(10):
+    bass.play_note(random.choice([50, 45]), i / 10, 0.5)
+
 while True:
     for pitch, volume, dur in zip(
         cycle(bass_pitches), cycle(bass_columes), cycle(bass_durs)

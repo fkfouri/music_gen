@@ -28,3 +28,11 @@ uv add mido pygame-ce librosa
 uv add scamp scamp-extensions pynput abjad python-ly python-rtmidi
 choco install lilypond fluidsynth
 ```
+
+
+## Curso 003 Ableton
+- [![Youtube](https://img.youtube.com/vi/ik_XEyOYhwY/mqdefault.jpg)](https://youtu.be/ik_XEyOYhwY)
+
+- [![Youtube](https://img.youtube.com/vi/msSeZxFG4Wc/mqdefault.jpg)](https://youtu.be/msSeZxFG4Wc)
+
+- Link Download https://abrir.link/FuVif

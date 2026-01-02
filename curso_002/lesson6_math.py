@@ -13,7 +13,7 @@ s.start_transcribing()
 
 i = 0
 while True:
-    raw_pitch = 80 + 10 * math.sin(s.beat() )
+    raw_pitch = 80 + 10 * math.sin(s.beat())
     raw_pitch = 80 + 10 * math.sin(100 / (0.1 + s.beat()))
 
     pitch = scale.round(raw_pitch)
@@ -22,7 +22,7 @@ while True:
 
     print(f"{raw_pitch}:{pitch}", end=" ")
 
-    i+=1
+    i += 1
     if i > 30:
         break
 

@@ -36,3 +36,6 @@ choco install lilypond fluidsynth
 - [![Youtube](https://img.youtube.com/vi/msSeZxFG4Wc/mqdefault.jpg)](https://youtu.be/msSeZxFG4Wc)
 
 - Link Download https://abrir.link/FuVif
+
+- https://revoluo.com.br/como-fazer-set-no-ableton/
+ - [![Youtube](https://img.youtube.com/vi/tShITeXkrW4/mqdefault.jpg)](https://youtu.be/tShITeXkrW4) 

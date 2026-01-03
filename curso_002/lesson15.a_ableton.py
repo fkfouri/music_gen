@@ -1,3 +1,5 @@
+# https://youtu.be/RddfomrECPA?list=PL_yUKG0GRuliL65l_qEG1uwCC03X4jioL
+
 from scamp import *
 import random
 

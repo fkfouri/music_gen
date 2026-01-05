@@ -13,7 +13,7 @@ bass_durs = [0.75, 0.25, 0.25, 0.5, 0.5, 0.25, 0.5, 0.25, 0.5, 0.5, 0.25]
 # drums = s.new_part("drums")
 # theramin = s.new_part("theramin")
 bass = s.new_part("slap bass")
-bass = s.new_midi_part("slap bass", "IAC Bus 1", start_channel=2, num_channels=1)
+# bass = s.new_midi_part("slap bass", "IAC Bus 1", start_channel=2, num_channels=1)
 
 for i in range(10):
     bass.play_note(random.choice([50, 45]), i / 10, 0.5)

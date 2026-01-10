@@ -39,3 +39,21 @@ choco install lilypond fluidsynth
 
 - https://revoluo.com.br/como-fazer-set-no-ableton/
  - [![Youtube](https://img.youtube.com/vi/tShITeXkrW4/mqdefault.jpg)](https://youtu.be/tShITeXkrW4) 
+
+
+ # De/Para
+
+| Nota | Oitava 0 | Oitava 1 | Oitava 2 | Oitava 3 | Oitava 4 | Oitava 5 | Oitava 6 |
+| ---- | -------- | -------- | -------- | -------- | -------- | -------- | -------- |
+| C    | 12       | 24       | 36       | 48       | **60**   | 72       | 84       |
+| C#   | 13       | 25       | 37       | 49       | 61       | 73       | 85       |
+| D    | 14       | 26       | 38       | 50       | 62       | 74       | 86       |
+| D#   | 15       | 27       | 39       | 51       | 63       | 75       | 87       |
+| E    | 16       | 28       | 40       | 52       | 64       | 76       | 88       |
+| F    | 17       | 29       | 41       | 53       | 65       | 77       | 89       |
+| F#   | 18       | 30       | 42       | 54       | 66       | 78       | 90       |
+| G    | 19       | 31       | 43       | 55       | 67       | 79       | 91       |
+| G#   | 20       | 32       | 44       | 56       | 68       | 80       | 92       |
+| A    | 21       | 33       | 45       | 57       | 69       | 81       | 93       |
+| A#   | 22       | 34       | 46       | 58       | 70       | 82       | 94       |
+| B    | 23       | 35       | 47       | 59       | 71       | 83       | 95       |

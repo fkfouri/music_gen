@@ -1,6 +1,7 @@
+import random
+
 from scamp import *
 from scamp_extensions.utilities import TimeVaryingParameter
-import random
 
 
 def build_chord(interval_options, num_notes, pitch_center, round_transposition=True):

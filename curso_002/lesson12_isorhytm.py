@@ -1,5 +1,6 @@
-from scamp import *
 from itertools import cycle
+
+from scamp import *
 
 # for x in cycle( [2,7,4]):
 #     print(x)

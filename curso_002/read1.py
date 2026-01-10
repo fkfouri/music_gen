@@ -1,5 +1,6 @@
 from scamp import *
 from scamp_extensions.parsing.midi import scrape_midi_file_to_dict
+
 from __init__ import JELOUS_GUY_MIDI
 
 midi_data = scrape_midi_file_to_dict(JELOUS_GUY_MIDI)

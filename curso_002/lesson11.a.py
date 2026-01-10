@@ -1,5 +1,6 @@
-from scamp import *
 import random
+
+from scamp import *
 
 
 def build_chord(interval_options, num_notes, pitch_center, round_transposition=True):

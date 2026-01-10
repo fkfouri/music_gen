@@ -1,6 +1,7 @@
-from scamp import *
 import random
 from itertools import cycle
+
+from scamp import *
 
 s = Session(tempo=100)
 

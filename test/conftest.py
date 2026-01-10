@@ -29,10 +29,12 @@ def PIANO(SESSION):
     piano = SESSION.new_part("Piano")
     yield piano
 
+
 @pytest.fixture()
 def GUITAR(SESSION):
     guitar = SESSION.new_part("Acoustic Guitar (nylon)")
     yield guitar
+
 
 @pytest.fixture()
 def CHURCH_ORGAN(SESSION):

@@ -19,7 +19,7 @@ def test_chord_execution(SESSION, PIANO):
     """Testa a execução de uma sequência de notas"""
     # Arrange - define as notas a tocar
 
-    notes = [[60, 64, 67], [66,60], [67,60], [69,60]]  # MIDI numbers
+    notes = [[60, 64, 67], [66, 60], [67, 60], [69, 60]]  # MIDI numbers
 
     # Act - toca as notas
     for note in notes:

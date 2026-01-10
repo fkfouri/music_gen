@@ -51,7 +51,7 @@ E|--0-----------------0-------------------|
     expected_notes_parte_a = [[40], [55], [59], [64], [59], [55]]
     expected_notes_parte_b = [[40], [55], [59], [64], [59], [71], [71, 40], [59], [55], [71, 59, 55], [64], [59], [55]]
 
-    for i,pitch in enumerate(music):
+    for i, pitch in enumerate(music):
         if isinstance(pitch, list):
             PIANO.play_chord(pitch, 0.5, 0.5)
         else:
@@ -59,3 +59,31 @@ E|--0-----------------0-------------------|
 
     assert parte_a == expected_notes_parte_a
     assert parte_b == expected_notes_parte_b
+
+
+def test_pitch_to_note():
+    """Testa a conversão de pitch MIDI para nome de nota"""
+    from src.sound_library import pitch_to_note, pitches_to_notes
+
+    assert pitch_to_note(60) == "C4"
+    assert pitch_to_note(70) == "A#4"
+    assert pitch_to_note(67) == "G4"
+
+    assert pitches_to_notes([60, 70, 67]) == ["C4", "A#4", "G4"]
+
+    x = pitches_to_notes([[40], [55], [59], [64], [59], [71], [71, 40], [59], [55], [71, 59, 55], [64], [59], [55]])
+    assert x == [
+        ["E2"],
+        ["G3"],
+        ["B3"],
+        ["E4"],
+        ["B3"],
+        ["B4"],
+        ["B4", "E2"],
+        ["B3"],
+        ["G3"],
+        ["B4", "B3", "G3"],
+        ["E4"],
+        ["B3"],
+        ["G3"],
+    ]

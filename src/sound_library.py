@@ -71,6 +71,66 @@ def get_note(nota, oitava=4):
     return 12 + (oitava * 12) + notas[nota]
 
 
+def pitch_to_note(pitch):
+    """
+    Convert a MIDI pitch number to note name with octave.
+
+    Parameters
+    ----------
+    pitch : int
+        MIDI pitch number (0-127)
+
+    Returns
+    -------
+    str
+        Note name (e.g. 'C4', 'A#4', 'Db3')
+
+    Example
+    -------
+    pitch_to_note(60)  # Returns 'C4'
+    pitch_to_note(70)  # Returns 'A#4'
+    pitch_to_note(67)  # Returns 'G4'
+    """
+    notas_nomes = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
+
+    oitava = (pitch // 12) - 1
+    nota_idx = pitch % 12
+    nota_nome = notas_nomes[nota_idx]
+
+    return f"{nota_nome}{oitava}"
+
+
+def pitches_to_notes(pitches):
+    """
+    Convert a list of MIDI pitch numbers to note names.
+    Handles both flat lists and nested lists (for chords).
+
+    Parameters
+    ----------
+    pitches : list
+        List of MIDI pitch numbers or list of lists of pitches
+
+    Returns
+    -------
+    list
+        List of note names or list of lists of note names
+
+    Example
+    -------
+    pitches_to_notes([60, 70, 67])
+    # Returns ['C4', 'A#4', 'G4']
+
+    pitches_to_notes([[40], [55], [71, 40]])
+    # Returns [['E2'], ['G#3'], ['B4', 'E2']]
+    """
+    # Se o primeiro elemento é uma lista (lista aninhada)
+    if pitches and isinstance(pitches[0], list):
+        return [[pitch_to_note(p) for p in chord] for chord in pitches]
+    else:
+        # Lista simples de pitches
+        return [pitch_to_note(pitch) for pitch in pitches]
+
+
 def tab_to_notes(tab_str):
     """
     Convert a guitar tablature to MIDI note numbers.
@@ -150,7 +210,6 @@ def tab_to_notes(tab_str):
                     nota_base = cordas_notas_base.get(corda, "C4")
                     midi_note = get_note(nota_base) + traste
                     notas_momento.append(midi_note)
-
 
         # Adiciona notas encontradas neste momento
         if notas_momento:

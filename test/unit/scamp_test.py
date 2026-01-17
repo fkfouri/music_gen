@@ -38,6 +38,8 @@ def test_music_file_execution(SESSION, PIANO, MIDI_FILE):
     # Arrange - carrega o arquivo MIDI
     from scamp_extensions.parsing.midi import scrape_midi_file_to_dict
 
+    SESSION.tempo = 120
+
     midi_data = scrape_midi_file_to_dict(MIDI_FILE)
     music_data = zip(midi_data["pitches"], midi_data["volumes"], midi_data["lengths"], midi_data["inter_onset_times"])
 

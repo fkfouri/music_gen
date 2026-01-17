@@ -1,4 +1,4 @@
-from src.sound_library import get_note, tab_to_notes
+from src.sound_library import get_note, pitch_to_note, pitches_to_notes, tab_to_notes
 
 
 def test_notes(PIANO):
@@ -63,7 +63,6 @@ E|--0-----------------0-------------------|
 
 def test_pitch_to_note():
     """Testa a conversão de pitch MIDI para nome de nota"""
-    from src.sound_library import pitch_to_note, pitches_to_notes
 
     assert pitch_to_note(60) == "C4"
     assert pitch_to_note(70) == "A#4"
@@ -87,3 +86,12 @@ def test_pitch_to_note():
         ["B3"],
         ["G3"],
     ]
+
+
+def test_pitch_range(PIANO):
+    # Arrange
+
+    for pitch in range(21, 97):
+        note_name = pitch_to_note(pitch)
+        print(f"{pitch}: {note_name}")
+        PIANO.play_note(pitch, 0.5, 1 / 8)

@@ -1,8 +1,9 @@
 import random
 
-from scamp import *
+# from scamp import *
+import scamp as sc
 
-s = Session()
+s = sc.Session()
 instr = s.new_part("cello")
 
 pitch = 65

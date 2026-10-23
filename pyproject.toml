@@ -1,6 +1,6 @@
 [project]
 name = "music-gen"
-version = "0.1.0"
+version = "0.2.0"
 description = "Add your description here"
 readme = "README.md"
 requires-python = "==3.10.19"
@@ -87,4 +87,8 @@ syncro_git = "src.fix:syncro_git"
 pre_lint = { cmd = "echo 'Black' && black .", help = "apply the black linter"}
 lint = { cmd = "ruff check . --fix", help = "apply ruff linter"}
 tree = "uv tree > .pip.tree"
-build-merger = { cmd = "pyinstaller --onefile --name merger_midi src/merger_midi.py", help = "build merger_midi standalone exe"}
+help = { cmd = "python src/merger_midi.py --help", help = "show merger_midi command-line options" }
+bump_patch = { cmd = "uv version --bump patch", help = "increment the patch version" }
+bump_minor = { cmd = "uv version --bump minor", help = "increment the minor version" }
+bump_major = { cmd = "uv version --bump major", help = "increment the major version" }
+build-merger = { cmd = "pyinstaller merger_midi.spec", help = "build merger_midi standalone exe"}

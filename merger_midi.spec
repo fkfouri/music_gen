@@ -5,7 +5,7 @@ a = Analysis(
     ['src\\merger_midi.py'],
     pathex=[],
     binaries=[],
-    datas=[],
+    datas=[('pyproject.toml', '.')],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},

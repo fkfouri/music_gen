@@ -39,12 +39,13 @@ as opções disponíveis:
 merger_midi.exe --help
 ```
 
-É possível escolher a pasta de entrada e o arquivo de saída, ou desativar a
-consolidação de trilhas:
+É possível escolher a pasta de entrada e o arquivo de saída, desativar a
+consolidação de trilhas ou manter as notas duplicadas:
 
 ```bash
 merger_midi.exe --input-dir midi_entrada --output resultado.mid
 merger_midi.exe --no-merge-same-instrument
+merger_midi.exe --no-remove-duplicate-notes
 ```
 
 

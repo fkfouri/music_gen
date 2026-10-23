@@ -55,7 +55,46 @@ def _programs(track: MidiTrack) -> frozenset[int]:
     return frozenset(message.program for message in track if message.type == "program_change")
 
 
-def merge_same_instrument_tracks(midi: MidiFile) -> list[MidiTrack]:
+def _deduplicate_note_events(events):
+    active_notes = defaultdict(list)
+    note_pairs = []
+
+    for tick, track_index, order, message in sorted(events, key=lambda event: (event[1], event[2])):
+        if message.type not in {"note_on", "note_off"}:
+            continue
+
+        key = (track_index, message.channel, message.note)
+        if message.type == "note_on" and message.velocity > 0:
+            active_notes[key].append((tick, order, message.velocity))
+        elif message.type == "note_off" or (message.type == "note_on" and message.velocity == 0):
+            if active_notes[key]:
+                start_tick, start_order, velocity = active_notes[key].pop(0)
+                note_pairs.append(
+                    (
+                        (message.channel, message.note, start_tick, velocity),
+                        (track_index, start_order),
+                        (track_index, order),
+                    )
+                )
+
+    note_pairs.sort(key=lambda pair: (pair[0][2], pair[1][0], pair[1][1]))
+    seen_notes = set()
+    duplicate_events = set()
+    for signature, note_on, note_off in note_pairs:
+        if signature in seen_notes:
+            duplicate_events.add(note_on)
+            duplicate_events.add(note_off)
+        else:
+            seen_notes.add(signature)
+
+    return [
+        event
+        for event in events
+        if (event[1], event[2]) not in duplicate_events
+    ]
+
+
+def merge_same_instrument_tracks(midi: MidiFile, remove_duplicate_notes: bool = True) -> list[MidiTrack]:
     """Consolida trilhas nomeadas equivalentes, preservando trilhas sem nome."""
     groups = defaultdict(list)
     independent_tracks = []
@@ -101,6 +140,8 @@ def merge_same_instrument_tracks(midi: MidiFile) -> list[MidiTrack]:
                     continue
                 events.append((absolute_tick, track_index, order, message.copy(time=0)))
 
+        if remove_duplicate_notes:
+            events = _deduplicate_note_events(events)
         events.sort(key=lambda event: event[:3])
         merged = MidiTrack()
         track_names = [track.name.strip() for _, track in payload]
@@ -150,7 +191,14 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         dest="merge_same_instrument",
         help="mantém as trilhas separadas, sem consolidar instrumentos repetidos",
     )
+    parser.add_argument(
+        "--no-remove-duplicate-notes",
+        action="store_false",
+        dest="remove_duplicate_notes",
+        help="mantém notas idênticas que começam no mesmo tempo, altura e velocidade",
+    )
     parser.set_defaults(merge_same_instrument=True)
+    parser.set_defaults(remove_duplicate_notes=True)
     return parser.parse_args(argv)
 
 
@@ -175,7 +223,7 @@ def main(argv: list[str] | None = None) -> int:
             print(f"Aviso: ignorando '{arq}' — {error}")
 
     if args.merge_same_instrument:
-        novo.tracks = merge_same_instrument_tracks(novo)
+        novo.tracks = merge_same_instrument_tracks(novo, remove_duplicate_notes=args.remove_duplicate_notes)
 
     novo.save(args.output)
     print(

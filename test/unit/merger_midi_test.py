@@ -63,6 +63,56 @@ def test_main_merges_matching_tracks_across_input_files(tmp_path, monkeypatch):
     assert [message.note for message in result.tracks[0] if message.type == "note_on"] == [60, 64]
 
 
+def test_main_removes_duplicate_notes_with_matching_onset_pitch_and_velocity(tmp_path, monkeypatch):
+    _write_midi(
+        tmp_path / "song.mid",
+        [
+            _make_track("Fretless Bass", 40, start_tick=120),
+            _make_track("Fretless Bass 2", 40, start_tick=120),
+            _make_track("Fretless Bass 3", 43, start_tick=240),
+        ],
+    )
+    monkeypatch.chdir(tmp_path)
+
+    assert main([]) == 0
+
+    result = mido.MidiFile(tmp_path / "merged.mid")
+    assert len(result.tracks) == 1
+    track = result.tracks[0]
+    note_ons = [message for message in track if message.type == "note_on" and message.velocity > 0]
+    note_offs = [
+        message
+        for message in track
+        if message.type == "note_off" or (message.type == "note_on" and message.velocity == 0)
+    ]
+    assert [(message.note, message.velocity) for message in note_ons] == [(40, 90), (43, 90)]
+    assert len(note_offs) == 2
+
+
+def test_main_can_keep_duplicate_notes(tmp_path, monkeypatch):
+    _write_midi(
+        tmp_path / "song.mid",
+        [
+            _make_track("Fretless Bass", 40, start_tick=120),
+            _make_track("Fretless Bass 2", 40, start_tick=120),
+        ],
+    )
+    monkeypatch.chdir(tmp_path)
+
+    assert main(["--no-remove-duplicate-notes"]) == 0
+
+    result = mido.MidiFile(tmp_path / "merged.mid")
+    track = result.tracks[0]
+    note_ons = [message for message in track if message.type == "note_on" and message.velocity > 0]
+    note_offs = [
+        message
+        for message in track
+        if message.type == "note_off" or (message.type == "note_on" and message.velocity == 0)
+    ]
+    assert len(note_ons) == 2
+    assert len(note_offs) == 2
+
+
 def test_main_keeps_numbered_tracks_with_different_programs_separate(tmp_path, monkeypatch):
     _write_midi(
         tmp_path / "song.mid",
@@ -106,6 +156,7 @@ def test_help_lists_supported_options(capsys):
     assert "--input-dir" in help_text
     assert "--output" in help_text
     assert "--no-merge-same-instrument" in help_text
+    assert "--no-remove-duplicate-notes" in help_text
     assert f"merger_midi {_VERSION}" in help_text
 
 

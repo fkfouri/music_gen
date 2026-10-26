@@ -1,0 +1,48 @@
+{
+    "python.defaultInterpreterPath": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
+    "terminal.integrated.profiles.windows": {
+        "PowerShell": {
+            "path": "${env:WINDIR}\\System32\\WindowsPowerShell\\v1.0\\powershell.exe"
+        }
+    },
+    "terminal.integrated.defaultProfile.windows": "PowerShell",
+    "python.testing.pytestArgs": [
+        "test"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true,
+// https://code.visualstudio.com/updates/v1_79#_copy-external-media-files-into-workspace-on-drop-or-paste-for-markdown
+    "markdown.copyFiles.overwriteBehavior": "nameIncrementally",
+    "markdown.copyFiles.destination": {
+        "**/*": "${documentDirName}/.attachments/"
+    },
+    "github.copilot.chat.commitMessageGeneration.instructions": [
+        {
+            "text": "Sempre gere as mensagens de commit em pt-br, seguindo estritamente a especificação Conventional Commits (tipo(escopo opcional): descrição)."
+        },
+        {
+            "text": "Escolha o tipo com base nos arquivos efetivamente alterados no diff, não no assunto geral da mudança: use 'docs:' quando as alterações forem apenas em arquivos .md, .txt ou documentação (ex: pasta docs/); use 'feat:' somente quando houver código novo de produção (ex: .php, .js, .py, .ts, etc) implementando uma funcionalidade nova; use 'fix:' para correção de bug em código; use 'refactor:' para mudanças de código sem alterar comportamento; use 'chore:' para configs, scripts ou tarefas de manutenção que não afetam código de produção nem documentação; use 'agent-ai:' para mudanças em skills, agents, comandos, regras ou instruções de assistentes de IA (ex: pasta .claude/, CLAUDE.md, AGENTS.md, .cursor/rules, copilot-instructions.md)."
+        },
+        {
+            "text": "Qualquer arquivo dentro de uma pasta '.attachments/', em qualquer nível do repositório, é um anexo de documento (imagem, mídia ou arquivo colado em um markdown) e deve ser tratado como tipo 'docs:', independentemente da extensão do arquivo."
+        },
+        {
+            "text": "Se o diff misturar tipos diferentes (ex: código e documentação), escolha o tipo predominante pela proporção de arquivos alterados, ou separe em commits distintos quando fizer sentido; nunca use 'feat:' apenas porque a mudança introduz um novo arquivo, se o conteúdo desse arquivo for documentação."
+        }
+    ],
+    // remove da exibicao arquivos e pastas desnecessarios
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/.DS_Store": true,
+        "**/Thumbs.db": true,
+        // "**/node_modules": true,
+        // "**/.turbo": true,
+        // "**/coverage": true,
+        // "**/dist": true,
+        // "**/build": true,
+        // "**/packages/eslint-config": true,
+        // "**/packages/typescript-config": true,
+    }    
+}

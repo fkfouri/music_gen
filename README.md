@@ -29,6 +29,25 @@ uv add scamp scamp-extensions pynput abjad python-ly python-rtmidi
 choco install lilypond fluidsynth
 ```
 
+## Merger MIDI
+
+Por padrão, `merger_midi.exe` combina os arquivos `.mid` da pasta atual e consolida
+trilhas com o mesmo instrumento (por exemplo, `Piano` e `Piano 2`). Para consultar
+as opções disponíveis:
+
+```bash
+merger_midi.exe --help
+```
+
+É possível escolher a pasta de entrada e o arquivo de saída, desativar a
+consolidação de trilhas ou manter as notas duplicadas:
+
+```bash
+merger_midi.exe --input-dir midi_entrada --output resultado.mid
+merger_midi.exe --no-merge-same-instrument
+merger_midi.exe --no-remove-duplicate-notes
+```
+
 
 ## Curso 003 Ableton
 - [![Youtube](https://img.youtube.com/vi/ik_XEyOYhwY/mqdefault.jpg)](https://youtu.be/ik_XEyOYhwY)
